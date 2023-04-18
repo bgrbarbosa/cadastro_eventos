@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import br.com.bgsis.cadastro_eventos.dto.ConvidadoDto;
@@ -23,6 +24,7 @@ public class ConvidadoMapper {
     	}
     	return listConvidadosDto;
     }
+
   
     public List<Convidado>toEntity(List<ConvidadoDto> convidadosDto) {
     	

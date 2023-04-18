@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.bgsis.cadastro_eventos.components.ConvidadoMapper;
@@ -39,7 +41,15 @@ public class ConvidadoServiceImpl implements ConvidadoService {
 	public List<ConvidadoDto>buscarConvidados() { 
 		convidados = repository.findAll();
 		return mapper.toDto(convidados);
-	}	
+	}
+	
+	@Override
+	public Page<Convidado> findAll(Pageable pageable) {
+		return  repository.findAll(pageable);
+
+	}
+	
+	
 
 	@Override
 	public void updateConvidado(Convidado convidado) {
@@ -55,5 +65,7 @@ public class ConvidadoServiceImpl implements ConvidadoService {
 	public void deleteConvidado(UUID id) {
 		repository.deleteById(id);		
 	}
+
+
 
 }
