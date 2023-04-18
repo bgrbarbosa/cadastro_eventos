@@ -77,7 +77,7 @@ public class EventoController {
     }*/
     
     @GetMapping
-    public ResponseEntity<Page<Evento>> getAllUsers(@PageableDefault(page = 0, size = 10, sort = "idEvento", 
+    public ResponseEntity<Page<Evento>> listarEventos(@PageableDefault(page = 0, size = 10, sort = "idEvento", 
                                                        direction = Sort.Direction.ASC)Pageable pageable){
         Page<Evento> eventoModel = service.findAll(pageable); 
         return ResponseEntity.status(HttpStatus.OK).body(eventoModel);

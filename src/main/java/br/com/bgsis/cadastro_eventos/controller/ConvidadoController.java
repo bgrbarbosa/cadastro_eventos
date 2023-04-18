@@ -49,7 +49,7 @@ public class ConvidadoController {
     }*/
     
     @GetMapping
-    public ResponseEntity<Page<Convidado>> getAllUsers(@PageableDefault(page = 0, size = 10, sort = "nomeConvidado", 
+    public ResponseEntity<Page<Convidado>> listarConvidados(@PageableDefault(page = 0, size = 10, sort = "nomeConvidado", 
                                                        direction = Sort.Direction.ASC)Pageable pageable){
         Page<Convidado> userModelPage = service.findAll(pageable); 
         return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
