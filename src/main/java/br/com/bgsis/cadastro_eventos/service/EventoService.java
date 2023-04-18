@@ -20,7 +20,7 @@ public interface EventoService {
 	
 	List<Evento>buscarPorNome(String nome);
 	
-	List<Evento>listarEventos();
+	List<EventoDto>listarEventos();
 	
 
 

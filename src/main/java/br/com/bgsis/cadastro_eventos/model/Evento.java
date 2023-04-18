@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,12 +47,12 @@ public class Evento implements Serializable {
 	
 	@Column
 	private Time fim;
-	
+
 	@ManyToMany
 	@JoinTable(name = "tb_convidado_evento",
-		       joinColumns = @JoinColumn(name = "evento_id"),
-		       inverseJoinColumns = @JoinColumn(name = "convidado_id"))
-	private Set<Convidado>convidados;
+		       joinColumns = @JoinColumn(name = "idEvento"),
+		       inverseJoinColumns = @JoinColumn(name = "idConvidado"))
+	private List<Convidado>convidados;
 	
 	
 	

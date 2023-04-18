@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bgsis.cadastro_eventos.dto.ConvidadoDto;
 import br.com.bgsis.cadastro_eventos.model.Convidado;
+import br.com.bgsis.cadastro_eventos.model.Evento;
 import br.com.bgsis.cadastro_eventos.service.ConvidadoService;
 
 @RestController
@@ -27,7 +32,9 @@ public class ConvidadoController {
 	ConvidadoService service;
 	
     @PostMapping
-    public ResponseEntity<Object> cadastrarConvidado(@RequestBody Convidado convidado){
+    public ResponseEntity<Object> cadastrarConvidado(@RequestBody ConvidadoDto convidadoDto){
+    	 var convidado = new Convidado();
+         BeanUtils.copyProperties(convidadoDto, convidado);
     	service.insertConvidado(convidado);    	
     	return  ResponseEntity.status(HttpStatus.CREATED).body(convidado);
     }

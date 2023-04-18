@@ -46,11 +46,9 @@ public class Convidado implements Serializable {
 	
 	@Column(nullable = false, length = 70)
 	private String emailConvidado;
-	
-	@ManyToMany
-	@JoinTable(name = "tb_convidado_evento",
-		       joinColumns = @JoinColumn(name = "evento_id"),
-		       inverseJoinColumns = @JoinColumn(name = "convidado_id"))
-	private Set<Evento>eventos;
+
+	@ManyToMany(mappedBy = "convidados")
+	@JsonIgnore
+	private List<Evento>eventos;
 
 }

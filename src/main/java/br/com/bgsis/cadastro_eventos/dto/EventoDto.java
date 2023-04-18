@@ -2,11 +2,11 @@ package br.com.bgsis.cadastro_eventos.dto;
 
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import br.com.bgsis.cadastro_eventos.model.Convidado;
-import br.com.bgsis.cadastro_eventos.model.Evento;
 import lombok.Data;
 
 @Data
@@ -17,8 +17,9 @@ public class EventoDto {
 	private LocalDate dataEvento;
 	private Time inicio;
 	private Time fim;
-	private Set<Convidado>convidados;
+	
+	private List<Convidado>convidados;
 	
 
-
+	
 }
