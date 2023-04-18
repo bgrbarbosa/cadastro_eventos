@@ -59,7 +59,6 @@ public class EventoServiceImpl implements EventoService {
 
 	@Override
 	public List<EventoDto> listarEventos() {
-		eventos.clear();
     	eventos = eventoRepository.findAll();
     	return mapper.toDto(eventos);
 	}

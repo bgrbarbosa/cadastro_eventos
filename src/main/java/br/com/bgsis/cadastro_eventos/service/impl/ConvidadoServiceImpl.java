@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.bgsis.cadastro_eventos.components.ConvidadoMapper;
 import br.com.bgsis.cadastro_eventos.dto.ConvidadoDto;
 import br.com.bgsis.cadastro_eventos.dto.EventoDto;
 import br.com.bgsis.cadastro_eventos.model.Convidado;
@@ -24,14 +25,20 @@ public class ConvidadoServiceImpl implements ConvidadoService {
 	@Autowired
 	ConvidadoRepository repository;
 	
+	@Autowired
+	ConvidadoMapper mapper;
+	
+	private List<Convidado>convidados = new ArrayList<>();
+	
 	@Override
 	public Convidado insertConvidado(Convidado convidado) {
 		return repository.save(convidado);		
 	}
 	
 	@Override
-	public List<Convidado>buscarConvidados() { 
-		return repository.findAll();
+	public List<ConvidadoDto>buscarConvidados() { 
+		convidados = repository.findAll();
+		return mapper.toDto(convidados);
 	}	
 
 	@Override
@@ -48,12 +55,5 @@ public class ConvidadoServiceImpl implements ConvidadoService {
 	public void deleteConvidado(UUID id) {
 		repository.deleteById(id);		
 	}
-
-	private void add(Evento evento1) {
-	}
-
-
-
-
 
 }

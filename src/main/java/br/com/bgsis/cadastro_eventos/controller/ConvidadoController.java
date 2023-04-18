@@ -40,12 +40,14 @@ public class ConvidadoController {
     }
     
     @GetMapping
-    public List<Convidado>buscarConvidados(){
+    public List<ConvidadoDto>buscarConvidados(){
     	return service.buscarConvidados();
     }
     
     @PutMapping
-    public ResponseEntity<Object>atualizarConvidado(@RequestBody Convidado convidado){
+    public ResponseEntity<Object>atualizarConvidado(@RequestBody ConvidadoDto convidadoDto){
+        var convidado = new Convidado();
+        BeanUtils.copyProperties(convidadoDto, convidado);
     	if (!service.buscarPorId(convidado.getIdConvidado()).isPresent()) {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Convidado não encontrado!!!");
     	}else {

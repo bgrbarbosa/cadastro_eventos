@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bgsis.cadastro_eventos.components.EventoMapper;
 import br.com.bgsis.cadastro_eventos.dto.EventoDto;
+import br.com.bgsis.cadastro_eventos.model.Convidado;
 import br.com.bgsis.cadastro_eventos.model.Evento;
 import br.com.bgsis.cadastro_eventos.service.EventoService;
 
