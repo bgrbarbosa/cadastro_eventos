@@ -8,6 +8,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,9 +43,16 @@ public class ConvidadoController {
     	return  ResponseEntity.status(HttpStatus.CREATED).body(convidado);
     }
     
-    @GetMapping
+   /* @GetMapping
     public List<ConvidadoDto>buscarConvidados(){
     	return service.buscarConvidados();
+    }*/
+    
+    @GetMapping
+    public ResponseEntity<Page<Convidado>> getAllUsers(@PageableDefault(page = 0, size = 10, sort = "nomeConvidado", 
+                                                       direction = Sort.Direction.ASC)Pageable pageable){
+        Page<Convidado> userModelPage = service.findAll(pageable); 
+        return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
     }
     
     @PutMapping

@@ -8,6 +8,10 @@ import java.util.UUID;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -67,9 +71,16 @@ public class EventoController {
     	}   	
     }
     
-    @GetMapping
+  /*  @GetMapping
     public List<EventoDto>listarEvento(){
     	return service.listarEventos();
+    }*/
+    
+    @GetMapping
+    public ResponseEntity<Page<Evento>> getAllUsers(@PageableDefault(page = 0, size = 10, sort = "idEvento", 
+                                                       direction = Sort.Direction.ASC)Pageable pageable){
+        Page<Evento> eventoModel = service.findAll(pageable); 
+        return ResponseEntity.status(HttpStatus.OK).body(eventoModel);
     }
 
     @GetMapping("/{id}")

@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.bgsis.cadastro_eventos.components.EventoMapper;
@@ -61,6 +63,11 @@ public class EventoServiceImpl implements EventoService {
 	public List<EventoDto> listarEventos() {
     	eventos = eventoRepository.findAll();
     	return mapper.toDto(eventos);
+	}
+
+	@Override
+	public Page<Evento> findAll(Pageable pageable) {
+		return eventoRepository.findAll(pageable);
 	}
 
 

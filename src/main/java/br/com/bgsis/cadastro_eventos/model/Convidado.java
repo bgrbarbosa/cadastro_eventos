@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -36,9 +37,11 @@ public class Convidado implements Serializable {
 	private UUID idConvidado;
 	
 	@Column(nullable = false, length = 60)
+	@NotBlank  // NotBlank não permite valores vazios e nem valores em branco
 	private String nomeConvidado;
 	
 	@Column(nullable = false, length = 12)
+	@NotBlank  // NotBlank não permite valores vazios e nem valores em branco
 	private String rgConvidado;
 	
 	@Column(nullable = false, length = 12)
