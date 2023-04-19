@@ -20,6 +20,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -44,13 +45,12 @@ public class Evento implements Serializable {
 	private String nomeEvento;
 	
 	@Column(nullable = false)
-	@NotBlank  // NotBlank não permite valores vazios e nem valores em branco
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd' T'HH:mm:ss'Z'") // Formata data para padrão utc
-	private LocalDateTime dataEvento;
+	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd") // Formata data para padrão utc
+	private LocalDate dataEvento;
 	
 	@Column(nullable= false)
-	@NotBlank  // NotBlank não permite valores vazios e nem valores em branco
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+	@NotNull  // NotBlank não permite valores vazios e nem valores em branco
 	private Time inicio;
 	
 	@Column

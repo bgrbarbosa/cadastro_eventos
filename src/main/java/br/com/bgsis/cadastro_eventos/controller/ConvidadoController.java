@@ -27,9 +27,11 @@ import br.com.bgsis.cadastro_eventos.dto.ConvidadoDto;
 import br.com.bgsis.cadastro_eventos.model.Convidado;
 import br.com.bgsis.cadastro_eventos.model.Evento;
 import br.com.bgsis.cadastro_eventos.service.ConvidadoService;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/convidados")
+@Log4j2
 public class ConvidadoController {
 
 	@Autowired
@@ -39,7 +41,8 @@ public class ConvidadoController {
     public ResponseEntity<Object> cadastrarConvidado(@RequestBody ConvidadoDto convidadoDto){
     	 var convidado = new Convidado();
          BeanUtils.copyProperties(convidadoDto, convidado);
-    	service.insertConvidado(convidado);    	
+    	service.insertConvidado(convidado);
+    	log.info("Registro: " + convidado.getIdConvidado() + " com sucesso!!");
     	return  ResponseEntity.status(HttpStatus.CREATED).body(convidado);
     }
     
@@ -51,6 +54,7 @@ public class ConvidadoController {
     @GetMapping
     public ResponseEntity<Page<Convidado>> listarConvidados(@PageableDefault(page = 0, size = 10, sort = "nomeConvidado", 
                                                        direction = Sort.Direction.ASC)Pageable pageable){
+    	log.info("Consultando lista de convidados!!");
         Page<Convidado> userModelPage = service.findAll(pageable); 
         return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
     }
@@ -60,9 +64,11 @@ public class ConvidadoController {
         var convidado = new Convidado();
         BeanUtils.copyProperties(convidadoDto, convidado);
     	if (!service.buscarPorId(convidado.getIdConvidado()).isPresent()) {
+    		log.info("Registro: " + convidadoDto.getEventos() + " não foi encontrado!!");
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Convidado não encontrado!!!");
     	}else {
         	service.updateConvidado(convidado);
+        	log.info("Registro: " + convidadoDto.getEventos() + " com sucesso!!");
         	return  ResponseEntity.status(HttpStatus.CREATED).body(convidado);    		
     	}
     }
@@ -71,8 +77,10 @@ public class ConvidadoController {
     public ResponseEntity<Object>buscarPorCodigo(@PathVariable(value = "id")UUID id){
     	Optional<Convidado>convidado = service.buscarPorId(id);
     	if (!convidado.isPresent()) {
-    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Convidado nao encontrado");
+    		log.info("Registro: " + id + " não foi encontrado!!");
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Convidado nao encontrado!!");
     	}else {
+    		log.info("Registro: " + id);
     		return ResponseEntity.status(HttpStatus.OK).body(convidado.get());
     	}
     }
@@ -81,9 +89,11 @@ public class ConvidadoController {
     public ResponseEntity<Object>deleteEndereco(@PathVariable(value = "id")UUID id){
     	Optional<Convidado>convidado = service.buscarPorId(id);
     	if (!convidado.isPresent()) {
+    		log.info("Registro: " + id + " não foi encontrado!!");
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Convidado não encontrado!!!");
     	}else {
     		service.deleteConvidado(id);
+    		log.info("Registro: " + id + " deletado com sucesso!!");
     		return ResponseEntity.status(HttpStatus.OK).body("Convidado deletado com sucesso!!!");
     	}
     }

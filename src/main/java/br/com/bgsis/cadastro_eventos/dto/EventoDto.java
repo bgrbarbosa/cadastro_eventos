@@ -2,6 +2,7 @@ package br.com.bgsis.cadastro_eventos.dto;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
